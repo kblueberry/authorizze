@@ -18,7 +18,8 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "format": "prettier --write \"src/**/*.tsx\""
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +42,7 @@
   "devDependencies": {
     "@craco/craco": "^7.1.0",
     "@types/react": "^18.2.55",
-    "@types/react-dom": "^18.2.19"
+    "@types/react-dom": "^18.2.19",
+    "prettier": "3.2.5"
   }
 }
