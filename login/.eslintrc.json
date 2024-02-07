@@ -3,8 +3,7 @@
     "browser": true,
     "es2021": true
   },
-
-  "parser": "@typescript-eslint/parser",
+  "parser": "@typescript-esl/Users/Khrystyno4ka/src/my-authorize-app/src/user/User.tsxint/parser",
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
