@@ -1,0 +1,22 @@
+.items-flex-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page {
+  height: 100vh;
+}
+
+.login-heading {
+  margin: 0;
+}
+
+.margin-center {
+  margin: auto;
+}
+
+.login-form {
+  margin: 1em 0 2.5em;
+}
