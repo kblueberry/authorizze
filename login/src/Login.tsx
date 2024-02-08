@@ -4,7 +4,12 @@ import { useState } from "react";
 import "./Login.css";
 import Password from "./Password";
 import UserName from "./UserName";
-import { ADMIN_FULL_NAME, ROOT } from "./constants";
+import {
+  ADMIN_FULL_NAME,
+  ADMIN_PASS,
+  ADMIN_USER_NAME,
+  ROOT,
+} from "./constants";
 
 export default function Login() {
   const [loginCredentials, setLoginCredentials] = useState<{
@@ -33,14 +38,19 @@ export default function Login() {
   };
 
   const authorize = () => {
-    localStorage.setItem(
-      "authorizedUser",
-      JSON.stringify({
-        login: loginCredentials.login,
-        userFullName: ADMIN_FULL_NAME,
-      })
-    );
-    window.location.href = `${ROOT}/user`;
+    if (
+      loginCredentials.login === ADMIN_USER_NAME &&
+      loginCredentials.password === ADMIN_PASS
+    ) {
+      localStorage.setItem(
+        "authorizedUser",
+        JSON.stringify({
+          login: loginCredentials.login,
+          userFullName: ADMIN_FULL_NAME,
+        })
+      );
+      window.location.href = `${ROOT}/user`;
+    }
   };
 
   return (
