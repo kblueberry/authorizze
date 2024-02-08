@@ -1,33 +1,23 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserInfo } from "./userInfo";
+import { ROOT } from "./constants";
+import { UserContext } from "./UserContext";
 
 export default function User() {
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    login: "",
-    password: "",
-    userFullName: "",
-  });
+  const { userDetails, checkIfAuthorized } = useContext(UserContext);
 
   useEffect(() => {
-    const userInfo = localStorage.getItem("authorizedUser");
-    if (userInfo) {
-      setUserInfo(JSON.parse(userInfo));
-    }
+    checkIfAuthorized();
   }, []);
-
-  console.log("user authorized: ", userInfo);
 
   return (
     <>
       <h1>Welcome, user!</h1>
       <p>
-        <i>Login:</i> {userInfo.login}
+        <i>Login:</i> {userDetails.login}
       </p>
       <p>
-        <i>Password:</i> {userInfo.password}
-      </p>
-      <p>
-        <i>Full name:</i> {userInfo.userFullName}
+        <i>Full name:</i> {userDetails.userFullName}
       </p>
     </>
   );

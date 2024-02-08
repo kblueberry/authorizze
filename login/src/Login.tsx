@@ -1,10 +1,10 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { useContext, useState } from "react";
-import { AuthorizationContext } from "./AuthorizationContext";
+import { useState } from "react";
 import "./Login.css";
 import Password from "./Password";
 import UserName from "./UserName";
+import { ADMIN_FULL_NAME } from "./constants";
 
 export default function Login() {
   const [loginCredentials, setLoginCredentials] = useState<{
@@ -14,8 +14,6 @@ export default function Login() {
     login: "",
     password: "",
   });
-
-  const { authorize } = useContext(AuthorizationContext);
   /**
    * Event handler for email input change
    */
@@ -32,6 +30,16 @@ export default function Login() {
     setLoginCredentials((prev) => {
       return { ...prev, password: value };
     });
+  };
+
+  const authorize = () => {
+    localStorage.setItem(
+      "authorizedUser",
+      JSON.stringify({
+        login: loginCredentials.login,
+        userFullName: ADMIN_FULL_NAME,
+      })
+    );
   };
 
   return (
@@ -52,9 +60,7 @@ export default function Login() {
         variant="contained"
         size="large"
         disabled={!loginCredentials.login || !loginCredentials.password}
-        onClick={() =>
-          authorize(loginCredentials.login, loginCredentials.password)
-        }
+        onClick={authorize}
       >
         Log in
       </Button>
