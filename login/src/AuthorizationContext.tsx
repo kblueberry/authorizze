@@ -4,14 +4,12 @@ type AuthorizationState = {
   userLogin: string;
   password: string;
   authorize: Function;
-  isAuthorized: boolean;
 };
 
 const initialState: AuthorizationState = {
   userLogin: "",
   password: "",
   authorize: Function,
-  isAuthorized: false,
 };
 
 export const AuthorizationContext = createContext(initialState);
@@ -23,7 +21,7 @@ export const AuthorizationProvider = ({
 }) => {
   const [authorizationState, setAuthorizationState] =
     useState<AuthorizationState>(initialState);
-  const { userLogin, password, isAuthorized } = authorizationState;
+  const { userLogin, password } = authorizationState;
 
   const authorize = (login: string, password: string) => {
     console.log("login data", login, password);
@@ -33,14 +31,12 @@ export const AuthorizationProvider = ({
     );
 
     setAuthorizationState((prev) => {
-      return { ...prev, isAuthorized: true, userLogin: login, password };
+      return { ...prev, userLogin: login, password };
     });
   };
 
   return (
-    <AuthorizationContext.Provider
-      value={{ userLogin, password, authorize, isAuthorized }}
-    >
+    <AuthorizationContext.Provider value={{ userLogin, password, authorize }}>
       {children}
     </AuthorizationContext.Provider>
   );
