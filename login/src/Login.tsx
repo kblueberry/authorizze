@@ -4,52 +4,44 @@ import { useState } from "react";
 import "./Login.css";
 import Password from "./Password";
 import UserName from "./UserName";
-import {
-  ADMIN_FULL_NAME,
-  ADMIN_PASS,
-  ADMIN_USER_NAME,
-  ROOT,
-} from "./constants";
+import { USERS, ROOT, LOGIN_ERROR } from "./constants";
 
 export default function Login() {
   const [loginCredentials, setLoginCredentials] = useState<{
-    login: string;
+    username: string;
     password: string;
   }>({
-    login: "",
+    username: "",
     password: "",
   });
-  /**
-   * Event handler for email input change
-   */
-  const onEmailChange = (value: string) => {
+  const [loginError, setLoginError] = useState<boolean>(false);
+
+  const onUsernameChange = (value: string) => {
+    setLoginError(false);
     setLoginCredentials((prev) => {
-      return { ...prev, login: value };
+      return { ...prev, username: value };
     });
   };
 
-  /**
-   * Event handler for password input change
-   */
   const onPasswordChange = (value: string) => {
+    setLoginError(false);
     setLoginCredentials((prev) => {
       return { ...prev, password: value };
     });
   };
 
   const authorize = () => {
-    if (
-      loginCredentials.login === ADMIN_USER_NAME &&
-      loginCredentials.password === ADMIN_PASS
-    ) {
-      localStorage.setItem(
-        "authorizedUser",
-        JSON.stringify({
-          login: loginCredentials.login,
-          userFullName: ADMIN_FULL_NAME,
-        })
-      );
-      window.location.href = `${ROOT}/user`;
+    const user = USERS.find(
+      (user) =>
+        user.username === loginCredentials.username &&
+        user.password === loginCredentials.password
+    );
+
+    if (user) {
+      localStorage.setItem("authorizedUser", JSON.stringify(user));
+      window.location.replace(`${ROOT}/user`);
+    } else {
+      setLoginError(true);
     }
   };
 
@@ -62,16 +54,17 @@ export default function Login() {
         autoComplete="off"
       >
         <p className="login_hint">
-          Please, use login &apos;admin&apos; and password &apos;admin123&apos;
+          Please, use <strong>admin:admin</strong> or <strong>user:user</strong>{" "}
           to sign in
         </p>
-        <UserName valueChange={(value: string) => onEmailChange(value)} />
+        <UserName valueChange={(value: string) => onUsernameChange(value)} />
         <Password valueChange={(value: string) => onPasswordChange(value)} />
       </Box>
+      {loginError && <strong className="login_error">{LOGIN_ERROR}</strong>}
       <Button
         variant="contained"
         size="large"
-        disabled={!loginCredentials.login || !loginCredentials.password}
+        disabled={!loginCredentials.username || !loginCredentials.password}
         onClick={authorize}
       >
         Log in

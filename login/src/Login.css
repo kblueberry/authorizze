@@ -25,3 +25,9 @@
   text-align: center;
   color: rgb(114, 113, 113);
 }
+
+.login_error {
+  color: red;
+  text-align: center;
+  margin-bottom: 20px;
+}

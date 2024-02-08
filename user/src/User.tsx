@@ -1,23 +1,17 @@
-import { useContext, useEffect, useState } from "react";
-import { UserInfo } from "./userInfo";
-import { ROOT } from "./constants";
+import { useContext } from "react";
 import { UserContext } from "./UserContext";
 
 export default function User() {
-  const { userDetails, checkIfAuthorized } = useContext(UserContext);
-
-  useEffect(() => {
-    checkIfAuthorized();
-  }, []);
+  const userInfo = useContext(UserContext);
 
   return (
     <>
       <h1>Welcome, user!</h1>
       <p>
-        <i>Login:</i> {userDetails.login}
+        <i>Username:</i> {userInfo.username}
       </p>
       <p>
-        <i>Full name:</i> {userDetails.userFullName}
+        <i>Full name:</i> {userInfo.fullName}
       </p>
     </>
   );

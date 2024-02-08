@@ -1,4 +1,9 @@
 export const ROOT = "https://kblueberry.github.io/autorizze";
-export const ADMIN_USER_NAME = "admin";
-export const ADMIN_PASS = "admin123";
-export const ADMIN_FULL_NAME = "Admin Admin";
+
+export const USERS = [
+  { username: "admin", password: "admin", fullName: "John Sena" },
+  { username: "user", password: "user", fullName: "Marilyn Monro" },
+];
+
+export const LOGIN_ERROR =
+  "Email or password are incorrect, please enter the valid ones";
