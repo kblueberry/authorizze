@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./Login.css";
 import Password from "./Password";
 import UserName from "./UserName";
-import { ADMIN_FULL_NAME } from "./constants";
+import { ADMIN_FULL_NAME, ROOT } from "./constants";
 
 export default function Login() {
   const [loginCredentials, setLoginCredentials] = useState<{
@@ -40,6 +40,7 @@ export default function Login() {
         userFullName: ADMIN_FULL_NAME,
       })
     );
+    window.location.href = `${ROOT}/user`;
   };
 
   return (
@@ -51,7 +52,8 @@ export default function Login() {
         autoComplete="off"
       >
         <p className="login_hint">
-          Please, use login "admin_admin" and password "admin123" to sign in
+          Please, use login &apos;admin&apos; and password &apos;admin123&apos;
+          to sign in
         </p>
         <UserName valueChange={(value: string) => onEmailChange(value)} />
         <Password valueChange={(value: string) => onPasswordChange(value)} />

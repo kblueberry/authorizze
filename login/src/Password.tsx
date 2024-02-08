@@ -1,10 +1,6 @@
 import TextField from "@mui/material/TextField";
 
-export default function Password({
-  valueChange,
-}: {
-  valueChange: (value: string) => void;
-}) {
+export default function Password({ valueChange }: { valueChange: Function }) {
   return (
     <TextField
       id="outlined-basic"
