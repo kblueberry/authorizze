@@ -1,13 +1,16 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useContext, useState } from "react";
-import UserName from "./UserName";
+import { AuthorizationContext } from "./AuthorizationContext";
 import "./Login.css";
 import Password from "./Password";
-import { AuthorizationContext } from "./AuthorizationContext";
+import UserName from "./UserName";
 
 export default function Login() {
-  const [loginCredentials, setLoginCredentials] = useState({
+  const [loginCredentials, setLoginCredentials] = useState<{
+    login: string;
+    password: string;
+  }>({
     login: "",
     password: "",
   });
@@ -31,11 +34,6 @@ export default function Login() {
     });
   };
 
-  const logIn = () => {
-    authorize(loginCredentials.login, loginCredentials.password);
-    console.log("authorize!");
-  };
-
   return (
     <div className="items-flex-column margin-center login-page">
       <h1 className="login-heading">Please, log in!</h1>
@@ -44,6 +42,9 @@ export default function Login() {
         className="login-form items-flex-column"
         autoComplete="off"
       >
+        <p className="login_hint">
+          Please, use login "admin_admin" and password "admin123" to sign in
+        </p>
         <UserName
           login={loginCredentials.login}
           valueChange={(value: string) => onEmailChange(value)}
@@ -57,7 +58,9 @@ export default function Login() {
         variant="contained"
         size="large"
         disabled={!loginCredentials.login || !loginCredentials.password}
-        onClick={logIn}
+        onClick={() =>
+          authorize(loginCredentials.login, loginCredentials.password)
+        }
       >
         Log in
       </Button>

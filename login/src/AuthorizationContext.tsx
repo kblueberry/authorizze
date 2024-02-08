@@ -3,14 +3,14 @@ import { ReactNode, createContext, useState } from "react";
 type AuthorizationState = {
   userLogin: string;
   password: string;
-  authorize: (login: string, pass: string) => void;
+  authorize: Function;
   isAuthorized: boolean;
 };
 
 const initialState: AuthorizationState = {
   userLogin: "",
   password: "",
-  authorize: () => {},
+  authorize: Function,
   isAuthorized: false,
 };
 
@@ -27,6 +27,10 @@ export const AuthorizationProvider = ({
 
   const authorize = (login: string, password: string) => {
     console.log("login data", login, password);
+    sessionStorage.setItem(
+      "authorizedUser",
+      JSON.stringify({ login, password, userFullName: "Admin Admin" })
+    );
 
     setAuthorizationState((prev) => {
       return { ...prev, isAuthorized: true, userLogin: login, password };
