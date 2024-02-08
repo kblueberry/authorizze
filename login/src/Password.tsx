@@ -1,10 +1,8 @@
 import TextField from "@mui/material/TextField";
 
 export default function Password({
-  password,
   valueChange,
 }: {
-  password: string;
   valueChange: (value: string) => void;
 }) {
   return (
@@ -13,7 +11,6 @@ export default function Password({
       label="Password"
       variant="outlined"
       margin="dense"
-      value={password}
       required={true}
       onChange={(event) => valueChange(event.target.value)}
     />

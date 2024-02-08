@@ -27,7 +27,7 @@ export const AuthorizationProvider = ({
 
   const authorize = (login: string, password: string) => {
     console.log("login data", login, password);
-    sessionStorage.setItem(
+    localStorage.setItem(
       "authorizedUser",
       JSON.stringify({ login, password, userFullName: "Admin Admin" })
     );

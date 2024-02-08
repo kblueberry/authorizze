@@ -45,14 +45,8 @@ export default function Login() {
         <p className="login_hint">
           Please, use login "admin_admin" and password "admin123" to sign in
         </p>
-        <UserName
-          login={loginCredentials.login}
-          valueChange={(value: string) => onEmailChange(value)}
-        />
-        <Password
-          password={loginCredentials.password}
-          valueChange={(value: string) => onPasswordChange(value)}
-        />
+        <UserName valueChange={(value: string) => onEmailChange(value)} />
+        <Password valueChange={(value: string) => onPasswordChange(value)} />
       </Box>
       <Button
         variant="contained"

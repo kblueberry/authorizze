@@ -1,10 +1,8 @@
 import TextField from "@mui/material/TextField";
 
 export default function UserName({
-  login,
   valueChange,
 }: {
-  login: string;
   valueChange: (value: string) => void;
 }) {
   return (
@@ -14,7 +12,6 @@ export default function UserName({
         label="Email"
         variant="outlined"
         margin="dense"
-        value={login}
         required={true}
         onChange={(event) => valueChange(event.target.value)}
       />
